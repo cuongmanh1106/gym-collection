@@ -27,7 +27,7 @@
           @endforeach
           <div class="panel-body">
             <div class="form">
-              <form class="form-validate form-horizontal" id="feedback_form" method="post" action="{{ route('categories.update',$cate->id) }}">
+              <form class="form-validate form-horizontal" id="feedback_form" method="post" action="{{ route('admin.categories.update',$cate->id) }}">
               	{{ csrf_field() }}
               	@if (count($errors) > 0)
                 <ul>
@@ -60,7 +60,7 @@
                 <div class="form-group">
                   <div class="col-lg-offset-2 col-lg-10">
                     <button class="btn btn-primary" type="submit">Save</button>
-                    <button class="btn btn-default" type="button" onclick="window.location='{{ route('categories.list') }}'">Cancel</button>
+                    <button class="btn btn-default" type="button" onclick="window.location='{{ route('admin.categories.list') }}'">Cancel</button>
                   </div>
                 </div>
               </form>

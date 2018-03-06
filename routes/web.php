@@ -17,36 +17,45 @@ Route::get('/', function () {
 
 
 
-Route::group(['prefix'=>'admin'],function(){
-	Route::get('/','Admin\HomeController@index')->name('admin');
-	Route::get('/login','Admin\LoginController@getLogin')->name('getLogin');
-	Route::post('/login','Admin\LoginController@postLogin')->name('postLogin');
+Route::group(['prefix'=>'admin' ],function(){
 
-	Route::group(['prefix'=>'users'],function(){
-		Route::get('/','Admin\UsersController@index')->name('users.list');
-		Route::get('/create','Admin\UsersController@create')->name('users.create');
-		Route::post('/store','Admin\UsersController@store')->name('users.store');
-		Route::get('/edit/{id}','Admin\UsersController@edit')->name('users.edit');
-		Route::post('/update/{id}','Admin\UsersController@update')->name('users.update');
-		Route::get('/delete/{id}','Admin\UsersController@delete')->name('users.delete');
-		Route::get('/logout','Admin\UsersController@logout')->name('users.logout');
+	
+	Route::group(['middleware' => 'ManageMiddleWare'] , function(){
+		Route::group(['prefix'=>'users'],function(){
+			Route::get('/','Admin\UsersController@index')->name('admin.users.list');
+			Route::get('/create','Admin\UsersController@create')->name('admin.users.create');
+			Route::post('/store','Admin\UsersController@store')->name('admin.users.store');
+			Route::get('/edit/{id}','Admin\UsersController@edit')->name('admin.users.edit');
+			Route::post('/update/{id}','Admin\UsersController@update')->name('admin.users.update');
+			Route::get('/delete/{id}','Admin\UsersController@delete')->name('admin.users.delete');
+			Route::get('/logout','Admin\UsersController@logout')->name('admin.users.logout');
+		});
+
+		Route::group(['prefix' => 'categories'],function(){
+			Route::get('/','Admin\CategoriesController@index')->name('admin.categories.list');
+			Route::get('/create','Admin\CategoriesController@create')->name('admin.categories.create');
+			Route::post('/store','Admin\CategoriesController@store')->name('admin.categories.store');
+			Route::get('/edit/{id}','Admin\CategoriesController@edit')->name('admin.categories.edit');
+			Route::post('/update/{id}','Admin\CategoriesController@update')->name('admin.categories.update');
+			Route::get('/delete/{id}','Admin\CategoriesController@delete')->name('admin.categories.delete');
+			Route::get('/show_products/{id}','Admin\CategoriesController@show_products')->name('admin.categories.product');
+			Route::get('/search','Admin\CategoriesController@search')->name('admin.categories.search');
+		});
+
+		route::group(['prefix'=>'products'],function(){
+			Route::get('/','Admin\ProductsController@index')->name('admin.products.list');
+			Route::get('/create','Admin\ProductsController@create')->name('admin.products.create');
+			Route::post('/store','Admin\ProductsController@store')->name('admin.products.store');
+			Route::get('/edit/{id}','Admin\ProductsController@edit')->name('admin.products.edit');
+			Route::post('/update/{id}','Admin\ProductsController@update')->name('admin.products.update');
+			Route::get('/delete/{id}','Admin\ProductsController@delete')->name('admin.products.delete');
+			Route::get('/search','Admin\ProductsController@search')->name('admin.products.search');
+		});
 	});
 
-	Route::group(['prefix' => 'categories'],function(){
-		Route::get('/','Admin\CategoriesController@index')->name('categories.list');
-		Route::get('/create','Admin\CategoriesController@create')->name('categories.create');
-		Route::post('/store','Admin\CategoriesController@store')->name('categories.store');
-		Route::get('/edit/{id}','Admin\CategoriesController@edit')->name('categories.edit');
-		Route::post('/update/{id}','Admin\CategoriesController@update')->name('categories.update');
-		Route::get('/delete/{id}','Admin\CategoriesController@delete')->name('categories.delete');
-	});
-
-	route::group(['prefix'=>'products'],function(){
-		Route::get('/','Admin\ProductsController@index')->name('products.list');
-		Route::get('/create','Admin\ProductsController@create')->name('products.create');
-		Route::post('/store','Admin\ProductsController@store')->name('products.store');
-		Route::get('/edit/{id}','Admin\ProductsController@edit')->name('products.edit');
-		Route::post('/update/{id}','Admin\ProductsController@update')->name('products.update');
-		Route::get('/delete/{id}','Admin\ProductsController@delete')->name('products.delete');
-	});
+	Route::get('/','Admin\HomeController@index')->name('admin')->middleware('loginPage');
+	Route::get('/login','Admin\LoginController@getLogin')->name('admin.getLogin');
+	Route::post('/login','Admin\LoginController@postLogin')->name('admin.postLogin');
 });
+
+Route::any('{all?}','Admin\HomeController@notfound')->where('all','(.*)');

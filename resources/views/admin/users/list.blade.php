@@ -43,9 +43,9 @@
                     <td>{{ $user->email }}</td>
                     <td>
                       <div class="btn-group">
-                        <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}"><i class="icon_plus_alt2"></i></a>
+                        <a class="btn btn-primary" href="{{ route('admin.users.edit',$user->id) }}"><i class="icon_plus_alt2"></i></a>
                         <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
-                        <a class="btn btn-danger" onclick="return check_delete()" href="{{ route('users.delete',$user->id) }}"><i class="icon_close_alt2"></i></a>
+                        <a class="btn btn-danger" onclick="return check_delete()" href="{{ route('admin.users.delete',$user->id) }}"><i class="icon_close_alt2"></i></a>
                       </div>
                     </td>
                   </tr>

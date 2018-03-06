@@ -15,8 +15,8 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              <li><a class="" href="{{ route('products.list') }}">List</a></li>
-              <li><a class="" href="{{ route('products.create') }}">Insert</a></li>
+              <li><a class="" href="{{ route('admin.products.list') }}">List</a></li>
+              <li><a class="" href="{{ route('admin.products.create') }}">Insert</a></li>
             </ul>
           </li>
           <li class="sub-menu">
@@ -26,8 +26,8 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              <li><a class="" href="{{ route('categories.list') }}">List</a></li>
-              <li><a class="" href="{{ route('categories.create') }}">Insert</a></li>
+              <li><a class="" href="{{ route('admin.categories.list') }}">List</a></li>
+              <li><a class="" href="{{ route('admin.categories.create') }}">Insert</a></li>
             </ul>
           </li>
 <!--           <li>
@@ -52,8 +52,8 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              <li><a class="active" href="{{ route('users.list') }}">List</a></li>
-              <li><a href="{{ route('users.create') }}">Insert</a></li>
+              <li><a class="active" href="{{ route('admin.users.list') }}">List</a></li>
+              <li><a href="{{ route('admin.users.create') }}">Insert</a></li>
             </ul>
           </li>
 

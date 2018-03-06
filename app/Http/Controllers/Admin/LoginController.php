@@ -10,17 +10,18 @@ use Hash;
 class LoginController extends Controller {
 
 	public function getLogin(Request $request) {
-		return redirect()->route('admin.index');
+		return redirect()->route('admin');
 	}
 	
 	public function postLogin(Request $request) {
 		$login = array(
 			'email' => $request->email,
-			'password' => $request->password
+			'password' => $request->password,
+			
 		);
 
-		if(Auth::attempt($login)) {
-			return redirect()->route('users.list');
+		if(Auth::attempt($login) && Auth::user()->role > 1) {
+			return redirect()->route('admin.users.list');
 		} else {
 			return back();
 		}

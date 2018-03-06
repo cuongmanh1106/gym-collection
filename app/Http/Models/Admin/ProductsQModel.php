@@ -22,4 +22,9 @@ class ProductsQModel extends Model
 	public static function get_products_by_cateid($cate_id) {
 		return DB::table('products')->where('cate_id','=',$cate_id)->get();
 	}
+
+	public static function search_product_by_name($name) {
+		return DB::table('products')->where('name','like','%'.$name.'%')->get();
+	}
+
 }

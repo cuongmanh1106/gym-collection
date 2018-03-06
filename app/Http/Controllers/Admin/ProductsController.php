@@ -131,7 +131,7 @@ class ProductsController extends Controller {
 			}
 
 			$request->session()->flash('alert-success','Success');
-			return redirect()->route('products.list');
+			return redirect()->route('admin.products.list');
 		} else {
 			$request->session()->flash('alert-danger','Fail');
 			return back();
@@ -147,6 +147,28 @@ class ProductsController extends Controller {
 
 	public function delete($id, Request $request) {
 		$product = ProductsQModel::get_product_by_id($id);
+		if(ProductsCModel::delete_product($id)) {
+			if(file_exists(public_path('img/'.$product->image))) {
+				unlink(public_path('img/'.$product->image));
+				$request->session()->flash('alert-success','Success');
+			} else {
+				$request->session()->flash('alert-warning','Fail Remove file');
+			}
+			return back();
+
+		} else {
+			$request->session()->flash('alert-danger','Fail');
+			return back();
+		}
 		
+	}
+
+	public function search() {
+		$name = $_GET["value"];
+		$products = ProductsQModel::search_product_by_name($name);
+		$data = [
+			'products' => $products
+		];
+		return view('admin.search_product')->with($data);
 	} 
 }

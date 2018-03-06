@@ -88,7 +88,7 @@ class UsersController extends Controller {
         }
         $user->save();
         $request->session()->flash('alert-success',"Success");
-        return redirect()->route('users.list');
+        return redirect()->route('admin.users.list');
 
     }
 

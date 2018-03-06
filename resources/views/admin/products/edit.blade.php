@@ -27,7 +27,7 @@
           @endforeach
           <div class="panel-body">
             <div class="form">
-              <form class="form-validate form-horizontal" enctype="multipart/form-data" id="feedback_form" method="post" action="{{ route('products.update',$product->id) }}">
+              <form class="form-validate form-horizontal" enctype="multipart/form-data" id="feedback_form" method="post" action="{{ route('admin.products.update',$product->id) }}">
               	{{ csrf_field() }}
               	@if (count($errors) > 0)
                 <ul>
@@ -81,7 +81,7 @@ height: 214px;" value="{{$product->description}}"></textarea>
                 <div class="form-group">
                   <div class="col-lg-offset-2 col-lg-10">
                     <button class="btn btn-primary" type="submit">Save</button>
-                    <button class="btn btn-default" type="button" onclick="window.location='{{ route('products.list') }}'">Cancel</button>
+                    <button class="btn btn-default" type="button" onclick="window.location='{{ route('admin.products.list') }}'">Cancel</button>
                   </div>
                 </div>
               </form>

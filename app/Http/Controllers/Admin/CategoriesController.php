@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Admin\CategoriesQModel;
 use App\Http\Models\Admin\CategoriesCModel;
+use App\Http\Models\Admin\ProductsQModel;
 use Illuminate\Http\Request;
 use App\Http\Requests\categoriesRequest;
 
@@ -97,7 +98,7 @@ class CategoriesController extends Controller {
 
         if(CategoriesCModel::update_cate($id,$data)) {
             $request->session()->flash('alert-success','Success');
-            return redirect()->route('categories.list');
+            return redirect()->route('admin.categories.list');
         } else {
             $request->session()->flash('alert-danger','Fail');
             return back();
@@ -112,10 +113,9 @@ class CategoriesController extends Controller {
      */
 
     public function delete($id , Request $request) {
-
         $count = count(CategoriesQModel::get_cate_by_parentid($id));
-
-        if($count == 0) {
+        $count_product = count(ProductsQModel::get_products_by_cateid($id));
+        if($count == 0  && $count_product== 0) {
             if(CategoriesCModel::delete_cate($id)) {
                 $request->session()->flash('alert-success','Success');
                 return back();
@@ -123,10 +123,30 @@ class CategoriesController extends Controller {
                 $request->session()->flash('alert-danger','Fail');
                 return back();
             }
-        } else {
+        } else if ($count != 0) {
             $request->session()->flash('alert-warning','You must delete children first!!!');
             return back();
+        } else if ($count_product != 0) {
+            $request->session()->flash('alert-warning','This category had product in it!!!');
+            return back();
         }
+    }
+
+    public function show_products($id) {
+        $products = ProductsQModel::get_products_by_cateid($id);
+        $data = [
+            'products' => $products
+        ];
+        return view('admin.products.list')->with($data);
+    }
+
+    public function search() {
+        $value = $_GET["value"];
+        $cates = CategoriesQModel::search_cate($value);
+        $data = [
+            'cates' => $cates
+        ];
+        return view('admin.categories.search')->with($data);
     }
     
 }

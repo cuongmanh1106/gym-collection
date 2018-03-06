@@ -3,7 +3,7 @@
 
   <div class="container">
 
-    <form class="login-form"  method="post" action="{{ route('postLogin') }}">
+    <form class="login-form"  method="post" action="{{ route('admin.postLogin') }}">
     
     	{{ csrf_field() }}
       <div class="login-wrap">

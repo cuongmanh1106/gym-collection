@@ -23,4 +23,8 @@ class CategoriesQModel extends Model
 		return $result[0];
 	}
 
+	public static function search_cate($value) {
+		return DB::table('categories')->where('name','like','%'.$value.'%')->get();
+	}
+
 }
