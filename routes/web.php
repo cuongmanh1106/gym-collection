@@ -15,7 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+Route::get('/','Display\HomeController@index');
+Route::get('/products','Display\ProductsController@show_products')->name('products.show');
+Route::get('/single/{id}','Display\ProductsController@show_detail')->name('products.single');
+Route::get('/sale','Display\CartController@sale')->name('cart.sale');
+Route::get('/checkout','Display\CartController@checkout')->name('cart.checkout');
+Route::get('/delete','Display\CartController@delete')->name('cart.delete');
+Route::post('/update', 'Display\CartController@update')->name('cart.update');
 
 Route::group(['prefix'=>'admin' ],function(){
 
