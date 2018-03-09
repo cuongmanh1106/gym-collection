@@ -3,5 +3,5 @@
   if($count == 0)
   	echo "Empty";
   else
-  	echo $count;
+  	echo "(".$count.")";
 ?>

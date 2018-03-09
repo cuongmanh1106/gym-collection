@@ -1,14 +1,5 @@
-@extends('include.layout')
-@section('title','checkout')
-@section('content')
 
-@foreach(['success','danger','info','warning'] as $msg)
-@if(Session::has('alert-'.$msg))
-  <h4 class="alert alert-{{ $msg }}">{{ Session::get('alert-'.$msg) }}<button class="close" data-dismiss="alert" aria-label="close">&times;</button></h4>
-@endif
-@endforeach
-<div id="newupdate">
-    <table border="1" width="80%" style="margin: 0 auto; font-size: 20px">
+<table border="1" width="80%" style="margin: 0 auto; font-size: 20px">
         <tr>
             <td>Name</td>
             <td>Image</td>
@@ -40,7 +31,3 @@
         </form>
     </table>    
     <h4 id="total-cart">Total:{{  $total }}</h4>
-</div>
-    <a class="btn btn-success"  href="{{ route('cart.book') }}" style="margin: auto 0; "  > Book</a>
-
-@endsection

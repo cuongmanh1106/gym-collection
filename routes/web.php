@@ -22,6 +22,12 @@ Route::get('/sale','Display\CartController@sale')->name('cart.sale');
 Route::get('/checkout','Display\CartController@checkout')->name('cart.checkout');
 Route::get('/delete','Display\CartController@delete')->name('cart.delete');
 Route::post('/update', 'Display\CartController@update')->name('cart.update');
+Route::get('/book','Display\CartController@book')->name('cart.book')->middleware('bookCart');
+Route::get('/getLogin','Display\LoginContrller@getLogin')->name('getLogin');
+Route::post('/postLogin','Display\LoginController@postLogin')->name('postLogin');
+Route::get('/getRegister','Display\LoginController@getRegister')->name('getRegister');
+Route::post('postRegister','Display\LoginController@postRegister')->name('postRegister');
+Route::get('/logout','Display\LoginController@logout')->name('logout');
 
 Route::group(['prefix'=>'admin' ],function(){
 
@@ -57,7 +63,21 @@ Route::group(['prefix'=>'admin' ],function(){
 			Route::get('/delete/{id}','Admin\ProductsController@delete')->name('admin.products.delete');
 			Route::get('/search','Admin\ProductsController@search')->name('admin.products.search');
 		});
+
+		route::group(['prefix'=>'sizes'],function(){
+			route::get('/{id}','Admin\SizesController@index')->name('admin.sizes.list');
+			route::get('/create/{id}','Admin\SizesController@create')->name('admin.sizes.create');
+			route::post('/store/{id}','Admin\SizesController@store')->name('admin.sizes.store');
+			route::get('/delete/{id}','Admin\SizesController@delete')->name('admin.sizes.delete');
+		});
+
+		route::group(['prefix' => 'size'],function() {
+			route::get('/','Admin\BillsController@index')->name('admin.bills.list');
+			route::get('/detail_bill/{id}','Admin\BillsController@detail')->name('admin.bills.detail');
+		});
+
 	});
+
 
 	Route::get('/','Admin\HomeController@index')->name('admin')->middleware('loginPage');
 	Route::get('/login','Admin\LoginController@getLogin')->name('admin.getLogin');

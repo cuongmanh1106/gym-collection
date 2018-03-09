@@ -13,7 +13,7 @@
         <ul class="nav pull-right top-menu">
 
           <!-- task notificatoin start -->
-          <li id="task_notificatoin_bar" class="dropdown">
+         <!--  <li id="task_notificatoin_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <i class="icon-task-l"></i>
                             <span class="badge bg-important">5</span>
@@ -95,10 +95,10 @@
                 <a href="#">See All Tasks</a>
               </li>
             </ul>
-          </li>
+          </li> -->
           <!-- task notificatoin end -->
           <!-- inbox notificatoin start-->
-          <li id="mail_notificatoin_bar" class="dropdown">
+         <!--  <li id="mail_notificatoin_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <i class="icon-envelope-l"></i>
                             <span class="badge bg-important">5</span>
@@ -160,14 +160,14 @@
                 <a href="#">See all messages</a>
               </li>
             </ul>
-          </li>
+          </li> -->
           <!-- inbox notificatoin end -->
           <!-- alert notification start-->
           <li id="alert_notificatoin_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="{{ route('admin.bills.list') }}" title="See new order">
 
                             <i class="icon-bell-l"></i>
-                            <span class="badge bg-important">7</span>
+                            <span class="badge bg-important">{{ $count_status_by_zero }}</span>
                         </a>
             <ul class="dropdown-menu extended notification">
               <div class="notify-arrow notify-arrow-blue"></div>

@@ -30,21 +30,21 @@
               <li><a class="" href="{{ route('admin.categories.create') }}">Insert</a></li>
             </ul>
           </li>
-<!--           <li>
-            <a class="" href="widgets.html">
+          <li>
+            <a class="" href="{{ route('admin.bills.list') }}">
                           <i class="icon_genius"></i>
-                          <span>Widgets</span>
+                          <span>Bills</span>
                       </a>
           </li>
-          <li>
+         <!--  <li>
             <a class="" href="chart-chartjs.html">
                           <i class="icon_piechart"></i>
                           <span>Charts</span>
 
                       </a>
 
-          </li>
- -->
+          </li> -->
+
           <li class="sub-menu">
             <a href="javascript:;" class="">
                           <i class="icon_table"></i>
@@ -57,10 +57,10 @@
             </ul>
           </li>
 
-          <li class="sub-menu">
+          <!-- <li class="sub-menu">
             <a href="javascript:;" class="">
                           <i class="icon_documents_alt"></i>
-                          <span>Users</span>
+                          <span>Bills</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
@@ -71,7 +71,7 @@
               <li><a class="" href="404.html">404 Error</a></li>
             </ul>
           </li>
-
+ -->
         </ul>
         <!-- sidebar menu end-->
       </div>

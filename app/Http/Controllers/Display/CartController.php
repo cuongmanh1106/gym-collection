@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Models\Admin\CategoriesQModel;
 use App\Http\Models\Admin\ProductsQModel;
 use App\Http\Models\Admin\ProductsCModel;
+use App\Http\Models\Admin\BillsCModel;
 use Cart;
+use Auth;
 
 class CartController extends Controller {
 	public function sale() {
@@ -37,6 +39,14 @@ class CartController extends Controller {
 	public function delete() {
 		$id = $_GET["id"];
 		Cart::remove($id);
+		// echo $id;
+		$content = Cart::content();
+		$total = Cart::subtotal();
+		$data = [
+			'content' => $content,
+			'total' => $total
+		];
+		return view('cart.delete')->with($data); 
 		
 	}
 
@@ -48,5 +58,31 @@ class CartController extends Controller {
 		$total = Cart::subtotal();
 		$str = $content->qty*$content->price."/".$total;
 		echo $str;
+	}
+
+	public function book() {
+
+		$content = Cart::content();
+		$total = Cart::subtotal();
+		$data_bill = [
+			'member_id' => Auth::user()->id,
+			'total' => $total
+		];
+		$bill_id = BillsCModel::insert_bill($data_bill);
+		if($bill_id!= null) {
+			foreach($content as $c) {
+				$data = [
+					'bill_id' => $bill_id,
+					'product_id' => $c->id,
+					'size' => 'M',
+					'quanlity' => $c->qty,
+					'total' => $c->price
+				];
+				BillsCModel::insert_detail_bill($data);
+			}
+			Cart::destroy();
+			return view('cart.book');
+		}
+
 	}
 }

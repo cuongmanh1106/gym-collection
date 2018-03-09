@@ -1,11 +1,13 @@
 function delete_cart(id,route) {
+	// alert(id);
 	$.ajax({
 		url:route,
-		type:'GET',
+		type:"GET",
 		cache:false,
-		data:{"id":id},
+		data:"id=" +id,
 		success:function(data,status) {
-			window.localtion = "{{ route('cart.checkout') }}";
+			// alert(status);
+			$('#newupdate').html(data);
 		}
 	});
 }

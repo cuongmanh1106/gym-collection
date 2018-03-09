@@ -185,7 +185,7 @@
 						 <!-- <form action="#" method="post" class="last">  -->
 								<!-- <input type="hidden" name="cmd" value="_cart" />
 								<input type="hidden" name="display" value="1" /> -->
-								<button onclick="window.location='{{ route('cart.checkout') }}'" class="w3view-cart" type="button" name="button" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>(<span style="color: red" id="show-cart">0</span>)</button>
+								<button onclick="window.location='{{ route('cart.checkout') }}'" class="w3view-cart" type="button" name="button" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i><span style="color: red" id="show-cart">(<?php echo Cart::content()->count()?>)</span></button>
 							<!-- </form>    -->
 						</li>
 					</ul>
@@ -207,11 +207,17 @@
 					<ul>
 						<li><a href="stores.html">Store Locator</a></li>
 						<li><a href="faq.html">FAQ</a></li>
-						<li><a class="popup-with-zoom-anim" href="#small-dialog1">Login</a></li>
+						<li><a id="focus" class="popup-with-zoom-anim" href="#small-dialog1">Login</a></li>
 						<li><a class="popup-with-zoom-anim" href="#small-dialog2">Sign Up</a></li>
 						<li><a href="codes.html">Codes</a></li>
 						<li><a href="icons.html">Icons</a></li>
 						<li><a href="contact.html">Contact</a></li>
+						<li>
+							@if(Auth::check())
+							Hello,<a href="{{ route('logout') }}" style="color: blue" title="Logout">{{ Auth::user()->name }} </a>
+							@endif
+
+						</li>
 					</ul>
 				</div>
 				<div class="clearfix"></div>
@@ -221,10 +227,12 @@
 				<div id="popup1">
 					<div id="small-dialog1" class="mfp-hide agileinfo">
 						<div class="pop_up">
-							<form action="#" method="post">
+								           
+							<form action="{{ route('postLogin') }}" method="post">
+								{{ csrf_field() }}
 								<h3>LOGIN</h3>
-								<input type="text" Name="Userame" placeholder="Username" required="">
-								<input type="password" Name="Password" placeholder="Password" required="">
+								<input type="text" name="email" placeholder="Email" required="">
+								<input type="password" name="password" placeholder="Password" required="">
 								<ul class="tick w3layouts agileinfo">
 									<li>
 										<input type="checkbox" id="brand1" value="">
@@ -242,12 +250,13 @@
 					</div>
 					<div id="small-dialog2" class="mfp-hide agileinfo">
 						<div class="pop_up">
-							<form action="#" method="post">
+							<form action="{{ route('postRegister') }}" method="post">
+								{{ csrf_field() }}
 								<h3>SIGN UP</h3>
-								<input type="text" Name="Name" placeholder="Name" required="">
-								<input type="text" Name="Email" placeholder="Email" required="">
-								<input type="password" Name="Password" placeholder="Password" required="">
-								<input type="text" Name="Phone Number" placeholder="Phone Number" required="">
+								<input type="text" name="name" placeholder="Name" required="">
+								<input type="text" name="email" placeholder="Email" required="">
+								<input type="password" name="password" placeholder="Password" required="">
+								<input type="text" name="confirm_password" placeholder="Confirm Password" required="">
 								<div class="send-button wthree agileits">
 									<input type="submit" value="SIGN UP">
 								</div>
