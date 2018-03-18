@@ -17,8 +17,10 @@ class loginPageMiddleWare
     {
         if(!Auth::check()) 
             return $next($request);
-        else 
+        else {
+            Auth::logout();
             return redirect()->route('admin.users.list');
+        }
 
     }
 }
